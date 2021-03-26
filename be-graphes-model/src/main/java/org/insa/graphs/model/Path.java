@@ -51,11 +51,14 @@ public class Path {
      * @throws IllegalArgumentException If the list of nodes is not valid, i.e. two
      *         consecutive nodes in the list are not connected in the graph.
      * 
-     * @deprecated Need to be implemented.
+     * 
      */
     public static Path createShortestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
-        List<Arc> arcs = new ArrayList<Arc>();
+        
+    	
+    	
+    	List<Arc> arcs = new ArrayList<Arc>();
         // TODO:
         return new Path(graph, arcs);
     }
@@ -198,11 +201,24 @@ public class Path {
      * 
      * @return true if the path is valid, false otherwise.
      * 
-     * @deprecated Need to be implemented.
+     * 
      */
     public boolean isValid() {
-        // TODO:
-        return false;
+        boolean result = false;
+
+        if(this.isEmpty()) { result = true; }
+        
+        else if(this.size() == 1) { result = true; }
+        
+        else if(this.getOrigin() == arcs.get(0).getOrigin()){
+        	result = true;
+        	for(int i=0; i<this.size()-2; i++) {
+        		if(arcs.get(i).getDestination() != arcs.get(i+1).getOrigin()) {
+        			result = false;
+        		}
+        	}
+        }
+        return(result);
     }
 
     /**
@@ -244,11 +260,15 @@ public class Path {
      * 
      * @return Minimum travel time to travel this path (in seconds).
      * 
-     * @deprecated Need to be implemented.
+     * 
      */
     public double getMinimumTravelTime() {
-        // TODO:
-        return 0;
+    	double minTravelTime = 0;
+    	java.util.List<Arc> liste = this.getArcs();
+    	for(Arc i : liste) {
+    		minTravelTime += i.getMinimumTravelTime();
+    	}
+    	return minTravelTime;
     }
 
 }
