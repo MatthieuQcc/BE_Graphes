@@ -2,6 +2,7 @@ package org.insa.graphs.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -30,12 +31,48 @@ public class Path {
      * @throws IllegalArgumentException If the list of nodes is not valid, i.e. two
      *         consecutive nodes in the list are not connected in the graph.
      * 
-     * @deprecated Need to be implemented.
+     * 
      */
     public static Path createFastestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
-        // TODO:
+        
+    	if(nodes.size() == 0) {
+    		return new Path(graph);
+    	}
+    	else if(nodes.size() == 1) {
+    		return new Path(graph, nodes.get(0));
+    	}
+    	else {
+    		boolean fastest_arc_init;
+    		Arc fastest_arc = null;
+    		Iterator<Node> it = nodes.iterator();
+    		Node orig = it.next();
+    		
+    		while(it.hasNext()) {
+    			Node dest = it.next();
+    			fastest_arc_init = false;
+    			for(Arc a : orig.getSuccessors()) {
+    				if(a.getDestination().equals(dest) == true) {
+    					if(fastest_arc_init ==false) {
+    						fastest_arc = a;
+    						fastest_arc_init = true;
+    					}
+    					else if(a.getMinimumTravelTime() < fastest_arc.getMinimumTravelTime()){
+    						fastest_arc = a;    						
+    					}
+    				}
+    			}
+    			if(fastest_arc_init == false) {
+    				throw new IllegalArgumentException();
+    			}
+    			else {
+    				arcs.add(fastest_arc);
+    				orig = dest;
+    			}
+    		}
+    	}        
+      
         return new Path(graph, arcs);
     }
 
@@ -58,9 +95,6 @@ public class Path {
     	// On doit parcourir toute la liste de Nodes
     	// On arrive au premier noeud. On regarde la liste des différents arcs pour aller au prochain Node
     	// On choisit l'arc le plus court entre deux Nodes  et on le met dans la liste. On passe au Node suivant
-
-    	float longueur = 0;
-    	Arc arcMin;
     	
     	List<Arc> arcs = new ArrayList<Arc>();
     	
@@ -71,17 +105,33 @@ public class Path {
     		return new Path(graph, nodes.get(0));
     	}
     	else {
-    		for(Node noeudCourant : nodes) {
-	        	longueur = 0; // On met longueur à 0 dès qu'on change de Node
-	        	arcMin = null; // On initialise arcMin
-	        	for(Arc a : noeudCourant.getSuccessors()) {
-	        		if(a.getLength() > longueur) {
-	        			arcMin = a;
-	        			longueur = a.getLength();
-	        		}
-	        	}
-	        	arcs.add(arcMin);
-	        }
+    		boolean shortest_arc_init;
+    		Arc shortest_arc = null;
+    		Iterator<Node> it = nodes.iterator();
+    		Node orig = it.next();
+    		
+    		while(it.hasNext()) {
+    			Node dest = it.next();
+    			shortest_arc_init = false;
+    			for(Arc a : orig.getSuccessors()) {
+    				if(a.getDestination().equals(dest) == true) {
+    					if(shortest_arc_init ==false) {
+    						shortest_arc = a;
+    						shortest_arc_init = true;
+    					}
+    					else if(a.getLength()<shortest_arc.getLength()){
+    						shortest_arc = a;    						
+    					}
+    				}
+    			}
+    			if(shortest_arc_init == false) {
+    				throw new IllegalArgumentException();
+    			}
+    			else {
+    				arcs.add(shortest_arc);
+    				orig = dest;
+    			}
+    		}
     	}
         return new Path(graph, arcs);
     }
