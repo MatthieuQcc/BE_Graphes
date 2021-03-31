@@ -55,12 +55,39 @@ public class Path {
      */
     public static Path createShortestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
-        List<Arc> arcs = new ArrayList<Arc>();
-        
-        
-         return new Path(graph, arcs);
+    	// On doit parcourir toute la liste de Nodes
+    	// On arrive au premier noeud. On regarde la liste des différents arcs pour aller au prochain Node
+    	// On choisit l'arc le plus court entre deux Nodes  et on le met dans la liste. On passe au Node suivant
+
+    	float longueur = 0;
+    	Arc arcMin;
+    	
+    	List<Arc> arcs = new ArrayList<Arc>();
+    	
+    	if(nodes.size() == 0) {
+    		return new Path(graph);
+    	}
+    	else if(nodes.size() == 1) {
+    		return new Path(graph, nodes.get(0));
+    	}
+    	
+        for(Node noeudCourant : nodes) {
+        	longueur = 0; // On met longueur à 0 dès qu'on change de Node
+        	arcMin = null; // On initialise arcMin
+        	for(Arc a : noeudCourant.getSuccessors()) {
+        		if(a.getLength() > longueur) {
+        			System.out.println("Test");
+        			arcMin = a;
+        			longueur = a.getLength();
+        		}
+        	}
+        	arcs.add(arcMin);
+        }
+        return new Path(graph, arcs);
     }
 
+    
+    
     /**
      * Concatenate the given paths.
      * 
