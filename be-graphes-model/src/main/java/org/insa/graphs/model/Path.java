@@ -70,19 +70,19 @@ public class Path {
     	else if(nodes.size() == 1) {
     		return new Path(graph, nodes.get(0));
     	}
-    	
-        for(Node noeudCourant : nodes) {
-        	longueur = 0; // On met longueur à 0 dès qu'on change de Node
-        	arcMin = null; // On initialise arcMin
-        	for(Arc a : noeudCourant.getSuccessors()) {
-        		if(a.getLength() > longueur) {
-        			System.out.println("Test");
-        			arcMin = a;
-        			longueur = a.getLength();
-        		}
-        	}
-        	arcs.add(arcMin);
-        }
+    	else {
+    		for(Node noeudCourant : nodes) {
+	        	longueur = 0; // On met longueur à 0 dès qu'on change de Node
+	        	arcMin = null; // On initialise arcMin
+	        	for(Arc a : noeudCourant.getSuccessors()) {
+	        		if(a.getLength() > longueur) {
+	        			arcMin = a;
+	        			longueur = a.getLength();
+	        		}
+	        	}
+	        	arcs.add(arcMin);
+	        }
+    	}
         return new Path(graph, arcs);
     }
 
