@@ -150,7 +150,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         	}
         	else {	// l'élement est trouvé, on le supprime
         		indexFin =--this.currentSize;
-        		if(indexFin>index) { // l'élement supp n'est pas le dernier
+        		if(indexFin>index) {  // l'élement supp n'est pas le dernier
         			dernierElem = this.array.get(indexFin);
 	        		this.array.set(index, dernierElem);
 	        		this.percolateDown(index);	        	
