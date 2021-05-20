@@ -11,7 +11,7 @@ public class Label implements Comparable<Label> {
 	public Label(Node noeud){
 		this.sommetCourant = noeud;
 		this.marque = false;
-		this.cout = Float.POSITIVE_INFINITY;
+		this.cout = 0;
 		this.pere = null; 
 	}
 	
@@ -31,7 +31,4 @@ public class Label implements Comparable<Label> {
 		return this.pere;
 	}
 	
-	
-	
 }
-
