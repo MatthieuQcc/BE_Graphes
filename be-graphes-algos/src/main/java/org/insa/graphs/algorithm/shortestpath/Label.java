@@ -1,7 +1,7 @@
 package org.insa.graphs.algorithm.shortestpath;
 
-import org.insa.graphs.model.Node;
-import org.insa.graphs.model.Arc;
+import org.insa.graphs.model.*;
+
 
 public class Label implements Comparable<Label> {
 	private Node sommetCourant;
@@ -60,7 +60,23 @@ public class Label implements Comparable<Label> {
 	public void setDansTas(boolean arg_tas) {
 		this.in_tas = arg_tas;
 	}
-	
-	
 
+	
+	@Override
+	public int compareTo(Label lb) {
+		int resultat;
+		if(this.getCost()<lb.getCost()) {
+			resultat = -1;
+		}
+				
+		else if (this.getCost() == lb.getCost()) {
+			resultat = 0;
+		}
+		
+		else {
+			resultat = 1;
+		}
+		return resultat;
+	}
+	
 }

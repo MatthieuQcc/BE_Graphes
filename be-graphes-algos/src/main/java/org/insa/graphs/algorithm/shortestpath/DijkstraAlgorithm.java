@@ -110,7 +110,6 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         	
         }
 
-        		
         // On se base sur la fin de l'algo de Bellman Ford pour trouver la solution
         // Si la destination n'a pas de prédécesseur, la solution est impossible
         
@@ -135,12 +134,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             
             // Create the final solution.
             solution = new ShortestPathSolution(data, Status.OPTIMAL, new Path(graph, list_arcs));
-        }
-        
-        
-        
-        
-        		
+        }    		
         		
         return solution;
     }
