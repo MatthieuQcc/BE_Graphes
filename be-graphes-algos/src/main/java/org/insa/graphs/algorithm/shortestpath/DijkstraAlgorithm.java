@@ -44,7 +44,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         lb_debut.setDansTas(true);
                
        		
-        //On notifie qu'on a introduit le premier élement 
+        // On notifie qu'on a introduit le premier élement 
         notifyOriginProcessed(data.getOrigin());
         
         // Variable qui reste à true tant qu'on est pas arrivé à destination
@@ -73,7 +73,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         		Node nd_successeur = arc.getDestination();
         		Label lb_successeur = tableauLabels[nd_successeur.getId()];
         		
-        		// Si le label  n'existe pas alors on va le créer
+        		// Si le label n'existe pas alors on va le créer
         		if(lb_successeur == null) {
         			// On notifie qu'on arrive à un noeud pas encore marqué
         			notifyNodeReached(arc.getDestination());
