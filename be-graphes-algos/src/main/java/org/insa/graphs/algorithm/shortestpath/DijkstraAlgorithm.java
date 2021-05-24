@@ -19,8 +19,9 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
     // Cette méthode va nous être utile pour A*. En effet, elle sera redéfinit dans A*Algorithm
     public Label nouveauLab (Node noeud) {
     	return new Label (noeud) ;
-    }    
+    }   
     
+       
 
     @Override
     protected ShortestPathSolution doRun() {
@@ -73,6 +74,10 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         	}
         	
         	
+        	// Affiche les couts des Label. Permet de tester l'algo
+			lb_courant.afficherCout();       	
+        	
+        	
         	// On parcourt tous les successeurs de lb_courant :
         	for(Arc arc: lb_courant.getNode().getSuccessors()) {
         		
@@ -96,6 +101,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         			// Si on a un meilleur cout alors on le met à jour
         			if(lb_successeur.getCost() > (lb_courant.getCost()+data.getCost(arc))) {
         				
+        			       				
         				lb_successeur.setPere(lb_courant.getNode());
         				lb_successeur.setCost(lb_courant.getCost() + (float)data.getCost(arc));
         			

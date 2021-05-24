@@ -66,6 +66,11 @@ public class Label implements Comparable<Label> {
 	public float getTotalCost() {
 		return this.cout;
 	}
+	
+	// Permet d'afficher les couts des Labels. Va être redéfini dans A*
+    public void afficherCout() {
+    	System.out.println(getCost());
+    }
 
 	
 	

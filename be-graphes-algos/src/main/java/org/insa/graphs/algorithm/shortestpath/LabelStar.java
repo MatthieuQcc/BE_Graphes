@@ -33,11 +33,14 @@ public class LabelStar extends Label{
 	
 	
 	// On redéfinit getTotalCost qui est utilisé dans compareTo de Label
-	
 	public float getTotalCost() {
 		return this.getCost() + (float)this.cost_estimation;
 	}
 	
+
+    public void afficherCout() {
+    	System.out.println(this.getTotalCost());
+    }
 	
 	
 }
