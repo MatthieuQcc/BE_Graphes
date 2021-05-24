@@ -74,7 +74,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         	}
         	
         	
-        	// Affiche les couts des Label. Permet de tester l'algo
+        	// Affiche les couts des Label. Permet de tester l'algo - Les couts sont bien croissants
 			lb_courant.afficherCout();       	
         	
         	
