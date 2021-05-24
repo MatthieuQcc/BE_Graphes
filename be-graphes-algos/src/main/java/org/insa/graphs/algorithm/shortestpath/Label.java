@@ -60,16 +60,23 @@ public class Label implements Comparable<Label> {
 	public void setDansTas(boolean arg_tas) {
 		this.in_tas = arg_tas;
 	}
+	
+	
+	// Pour LabelStar
+	public float getTotalCost() {
+		return this.cout;
+	}
 
+	
 	
 	@Override
 	public int compareTo(Label lb) {
 		int resultat;
-		if(this.getCost()<lb.getCost()) {
+		if(this.getTotalCost()<lb.getTotalCost()) {
 			resultat = -1;
 		}
 				
-		else if (this.getCost() == lb.getCost()) {
+		else if (this.getTotalCost() == lb.getTotalCost()) {
 			resultat = 0;
 		}
 		

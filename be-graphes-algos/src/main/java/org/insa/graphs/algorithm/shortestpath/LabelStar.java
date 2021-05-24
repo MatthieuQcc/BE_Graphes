@@ -10,7 +10,7 @@ public class LabelStar extends Label{
 	
 	public LabelStar(Node noeud_actuel, ShortestPathData data, double Vitesse_Max){
 		
-		super(noeud_actuel);
+		super(noeud_actuel); //LabelStar hérite de Label
 		
 		// Plus court chemin en temps
 		if(data.getMode() == Mode.TIME) {
@@ -31,5 +31,13 @@ public class LabelStar extends Label{
 		return this.cost_estimation;
 	}
 	
-		
+	
+	// On redéfinit getTotalCost qui est utilisé dans compareTo de Label
+	
+	public float getTotalCost() {
+		return this.getCost() + (float)this.cost_estimation;
+	}
+	
+	
+	
 }

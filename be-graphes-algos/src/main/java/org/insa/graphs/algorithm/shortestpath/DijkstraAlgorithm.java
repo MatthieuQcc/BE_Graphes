@@ -14,6 +14,13 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
     public DijkstraAlgorithm(ShortestPathData data) {
         super(data);
     }
+    
+    
+    // Cette méthode va nous être utile pour A*. En effet, elle sera redéfinit dans A*Algorithm
+    public Label nouveauLab (Node noeud) {
+    	return new Label (noeud) ;
+    }    
+    
 
     @Override
     protected ShortestPathSolution doRun() {
@@ -37,7 +44,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         
         
         // Initialisation avec le sommet d'origine
-        Label lb_debut = new Label(data.getOrigin());
+        Label lb_debut = nouveauLab(data.getOrigin());
         tableauLabels[lb_debut.getNode().getId()] = lb_debut;
         tasLabels.insert(lb_debut);
         lb_debut.setCost(0);
@@ -77,7 +84,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         		if(lb_successeur == null) {
         			// On notifie qu'on arrive à un noeud pas encore marqué
         			notifyNodeReached(arc.getDestination());
-        			lb_successeur = new Label(nd_successeur);
+        			lb_successeur = nouveauLab(nd_successeur);
         			// On le met dans le tableau
         	        tableauLabels[lb_successeur.getNode().getId()] = lb_successeur;
         		}
