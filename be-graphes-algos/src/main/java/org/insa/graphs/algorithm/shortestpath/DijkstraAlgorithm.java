@@ -101,7 +101,6 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         			// Si on a un meilleur cout alors on le met à jour
         			if(lb_successeur.getCost() > (lb_courant.getCost()+data.getCost(arc))) {
         				
-        			       				
         				lb_successeur.setPere(lb_courant.getNode());
         				lb_successeur.setCost(lb_courant.getCost() + (float)data.getCost(arc));
         			
