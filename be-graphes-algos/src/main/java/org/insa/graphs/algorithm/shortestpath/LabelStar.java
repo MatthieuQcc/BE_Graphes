@@ -38,6 +38,7 @@ public class LabelStar extends Label{
 	}
 	
 
+	// Pour tester et afficher les couts au fur et à mesure. C'est croissant.
     public void afficherCout() {
     	System.out.println(this.getTotalCost());
     }

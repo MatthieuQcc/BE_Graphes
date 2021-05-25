@@ -6,7 +6,7 @@ import org.insa.graphs.model.*;
 public class Label implements Comparable<Label> {
 	private Node sommetCourant;
 	private float cout;
-	public Node pere;
+	private Node pere;
 	private boolean marque;
 	private boolean in_tas;
 	
@@ -38,6 +38,7 @@ public class Label implements Comparable<Label> {
 	public boolean getDansTas() {
 		return this.in_tas;
 	}
+	
 	
 	// Méthode modifiant le label
 	
