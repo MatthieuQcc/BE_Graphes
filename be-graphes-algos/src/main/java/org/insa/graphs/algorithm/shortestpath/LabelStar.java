@@ -14,7 +14,7 @@ public class LabelStar extends Label{
 		
 		// Plus court chemin en temps
 		if(data.getMode() == Mode.TIME) {
-			this.cost_estimation = (noeud_actuel.getPoint().distanceTo(data.getDestination().getPoint())) / Vitesse_Max;		
+			this.cost_estimation = noeud_actuel.getPoint().distanceTo(data.getDestination().getPoint()) / Vitesse_Max;		
 		}
 		
 		// Plus court chemin en longueur
