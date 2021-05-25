@@ -68,28 +68,19 @@ public class Label implements Comparable<Label> {
 		return this.cout;
 	}
 	
+
 	// Permet d'afficher les couts des Labels. Va être redéfini dans A*
     public void afficherCout() {
     	System.out.println(getCost());
     }
 
 	
-	
+	// Renvoi une valeur qui va permettre au tas binaire de faire son travail.
+    // C'est parce qu'on veut comparer des labels entre eux. Il faut donc définir un compareTo adapté
 	@Override
-	public int compareTo(Label lb) {
-		int resultat;
-		if(this.getTotalCost()<lb.getTotalCost()) {
-			resultat = -1;
-		}
-				
-		else if (this.getTotalCost() == lb.getTotalCost()) {
-			resultat = 0;
-		}
-		
-		else {
-			resultat = 1;
-		}
-		return resultat;
+	public int compareTo(Label autre_lb) {
+		return Float.compare(this.getTotalCost(), autre_lb.getTotalCost());
 	}
+	
 	
 }
