@@ -59,7 +59,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         boolean cheminEnCours = true;
         
         
-        // Iterations
+        // Iterations -- tant que le tas n'est pas vide est qu'on n'est pas arrivé à destination
         while(tasLabels.isEmpty() == false && cheminEnCours) {
         	Label lb_courant = tasLabels.deleteMin();
         	lb_courant.setDansTas(false);
