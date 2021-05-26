@@ -25,6 +25,7 @@ public class LabelStar extends Label{
 	
 	}
 	
+	
 	// Méthodes permettant d'obtenir des infos sur le Label
 	
 	public double getCostEstimation() {
@@ -42,6 +43,5 @@ public class LabelStar extends Label{
     public void afficherCout() {
     	System.out.println(this.getTotalCost());
     }
-	
 	
 }

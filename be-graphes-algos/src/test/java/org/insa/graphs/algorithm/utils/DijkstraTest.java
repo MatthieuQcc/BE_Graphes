@@ -15,6 +15,12 @@ import java.util.stream.IntStream;
 import org.insa.graphs.model.*;
 import org.insa.graphs.model.RoadInformation.RoadType;
 import org.insa.graphs.algorithm.*;
+import org.insa.graphs.algorithm.AbstractSolution.Status;
+import org.insa.graphs.algorithm.shortestpath.BellmanFordAlgorithm;
+import org.insa.graphs.algorithm.shortestpath.DijkstraAlgorithm;
+import org.insa.graphs.algorithm.shortestpath.ShortestPathAlgorithm;
+import org.insa.graphs.algorithm.shortestpath.ShortestPathData;
+import org.insa.graphs.algorithm.shortestpath.ShortestPathSolution;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -56,19 +62,50 @@ public class DijkstraTest {
         nodes[5]=new Node(5,new Point(43,45));
         
         // Add arcs...
-        a2b = Node.linkNodes(nodes[0], nodes[1], 1, speed10, null);
-        a2c = Node.linkNodes(nodes[0], nodes[2], 3, speed20, null);
-        a2e = Node.linkNodes(nodes[0], nodes[4], 3, speed10, null);
-        b2c = Node.linkNodes(nodes[1], nodes[2], 5, speed10, null);
-        c2d_1 = Node.linkNodes(nodes[2], nodes[3], 7, speed20, null);
-        c2d_2 = Node.linkNodes(nodes[2], nodes[3], 9, speed10, null);
-        c2d_3 = Node.linkNodes(nodes[2], nodes[3], 4, speed20, null);
-        d2a = Node.linkNodes(nodes[3], nodes[0], 4, speed20, null);
-        d2e = Node.linkNodes(nodes[3], nodes[4], 9, speed10, null);
-        e2d = Node.linkNodes(nodes[4], nodes[3], 10, speed20, null);
+        a2b = Node.linkNodes(nodes[0], nodes[1], 10, speed10, null);
+        a2c = Node.linkNodes(nodes[0], nodes[2], 15, speed10, null);
+        a2e = Node.linkNodes(nodes[0], nodes[4], 15, speed20, null);
+        b2c = Node.linkNodes(nodes[1], nodes[2], 10, speed10, null);
+        c2d_1 = Node.linkNodes(nodes[2], nodes[3], 20, speed10, null);
+        c2d_2 = Node.linkNodes(nodes[2], nodes[3], 10, speed10, null);
+        c2d_3 = Node.linkNodes(nodes[2], nodes[3], 15, speed20, null);
+        d2a = Node.linkNodes(nodes[3], nodes[0], 15, speed10, null);
+        d2e = Node.linkNodes(nodes[3], nodes[4], 22.8f, speed20, null);
+        e2d = Node.linkNodes(nodes[4], nodes[0], 10, speed10, null);
     	
     	graph = new Graph("ID", "", Arrays.asList(nodes), new GraphStatistics(null,9,1,72,1));     
     	
+    }
+    
+    // Méthode qui va être redéfinit dans AStarTest
+    protected ShortestPathAlgorithm doAlgo(ShortestPathData data) {
+    	return new DijkstraAlgorithm(data);
+    } 
+    
+    @Test
+    public void Chemin_Valide() {
+    	ShortestPathData data = new ShortestPathData(graph,nodes[0],nodes[1],ArcInspectorFactory.getAllFilters().get(0));
+    	ShortestPathAlgorithm Dijkstra = doAlgo(data);
+    	ShortestPathSolution solution = Dijkstra.run();
+    	assertTrue(solution.getPath().isValid());
+    }
+    
+    @Test
+    public void Bellman_Comparaison() {
+    	ShortestPathData data = new ShortestPathData(graph,nodes[0],nodes[1],ArcInspectorFactory.getAllFilters().get(0));
+    	ShortestPathAlgorithm Dijkstra = doAlgo(data);
+    	ShortestPathAlgorithm Bellman = new BellmanFordAlgorithm(data);
+    	ShortestPathSolution solution_dijkstra = Dijkstra.run();
+    	ShortestPathSolution solution_bellman = Bellman.run();
+    	assertEquals(solution_dijkstra.getPath().getLength(),solution_bellman.getPath().getLength(), 1e-6);
+    }
+    
+    @Test
+    public void Chemin_Inexistant() {
+    	ShortestPathData data = new ShortestPathData(graph,nodes[0],nodes[5],ArcInspectorFactory.getAllFilters().get(0));
+    	ShortestPathAlgorithm Dijkstra = doAlgo(data);
+    	ShortestPathSolution solution = Dijkstra.run();
+    	assertEquals(solution.getStatus(),Status.INFEASIBLE);
     }
     
     
